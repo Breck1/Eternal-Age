@@ -684,10 +684,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="MyBox.csproj">
-      <Project>{B0240D90-833D-154C-7DE1-D5B8C86D2C7B}</Project>
-      <Name>MyBox</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.2D.PixelPerfect.Samples.Editor.csproj">
       <Project>{982486BE-03F2-931B-FC51-3F8EF1A61669}</Project>
       <Name>Unity.2D.PixelPerfect.Samples.Editor</Name>
@@ -695,6 +691,10 @@
     <ProjectReference Include="Unity.2D.PixelPerfect.Samples.csproj">
       <Project>{810009BC-8A17-6599-307C-52F5AE862964}</Project>
       <Name>Unity.2D.PixelPerfect.Samples</Name>
+    </ProjectReference>
+    <ProjectReference Include="MyBox.csproj">
+      <Project>{B0240D90-833D-154C-7DE1-D5B8C86D2C7B}</Project>
+      <Name>MyBox</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
