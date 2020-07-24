@@ -857,24 +857,24 @@ MonoBehaviour:
   spearLeftRightGameObject: {fileID: 1552352707}
   tempV: 0
   tempH: 0
-  spearPositionUpX: 0.075
-  spearPositionUpY: 0.134
-  spearPositionDownX: -0.0649
-  spearPositionDownY: -0.179
-  spearPositionLeftX: -0.082
-  spearPositionLeftY: -0.023
-  spearPositionRightX: 0.096
-  spearPositionRightY: -0.015
+  spearPositionUpX: 0
+  spearPositionUpY: 0
+  spearPositionDownX: 0
+  spearPositionDownY: 0
+  spearPositionLeftX: 0
+  spearPositionLeftY: 0
+  spearPositionRightX: 0
+  spearPositionRightY: 0
   shieldUpDownGameObject: {fileID: 1761474292}
   shieldLeftRightGameObject: {fileID: 1082528888}
-  shieldPositionUpX: -0.1222
-  shieldPositionUpY: 0.0056
-  shieldPositionDownX: 0.114
-  shieldPositionDownY: 0.003
-  shieldPositionLeftX: -0.0767
-  shieldPositionLeftY: -0.023
-  shieldPositionRightX: 0.0747
-  shieldPositionRightY: 0.008
+  shieldPositionUpX: 0
+  shieldPositionUpY: 0
+  shieldPositionDownX: 0
+  shieldPositionDownY: 0
+  shieldPositionLeftX: 0
+  shieldPositionLeftY: 0
+  shieldPositionRightX: 0
+  shieldPositionRightY: 0
 --- !u!4 &2147220572
 Transform:
   m_ObjectHideFlags: 0
