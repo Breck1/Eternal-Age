@@ -27,19 +27,41 @@ public class PlayerController : MonoBehaviour
 	[ConditionalField(nameof(enableSprint))] public float sprintSpeedMultiplier = 1.5f;
 
 	[Header("Spear")]
-	public GameObject SpearUpDown;
-	public GameObject SpearLeftRight;
-	SpriteRenderer SpearUpDownSprite;
-	SpriteRenderer SpearLeftRightSprite;
+	public GameObject spearUpDownGameObject;
+	public GameObject spearLeftRightGameObject;
+	SpriteRenderer spearUpDownSprite;
+	SpriteRenderer spearLeftRightSprite;
 	public bool tempV;
 	public bool tempH;
-	public float spearPosition;
+	[Separator("Spear Positions")]
+	public float spearPositionUpX;
+	public float spearPositionUpY;
+	public float spearPositionDownX;
+	public float spearPositionDownY;
+	public float spearPositionLeftX;
+	public float spearPositionLeftY;
+	public float spearPositionRightX;
+	public float spearPositionRightY;
 
+	//public float spearPositionY;
 
+	[Header("Shield")]
+	public GameObject shieldUpDownGameObject;									 
+	public GameObject shieldLeftRightGameObject;								 
+	private SpriteRenderer shieldUpDownSprite;									 
+	private SpriteRenderer shieldLeftRightSprite;
+	[Separator("Shield Positions")]
+	public float shieldPositionUpX;
+	public float shieldPositionUpY;
+	public float shieldPositionDownX;
+	public float shieldPositionDownY;
+	public float shieldPositionLeftX;
+	public float shieldPositionLeftY;											 
+	public float shieldPositionRightX;																			 
+	public float shieldPositionRightY;
+
+	Animator animator;
 	CharacterController controller;
-    Animator animator;
-
-	[SerializeField]
 	private string Fire1 = "Fire1";
 
 	private string horizontal = "Horizontal";
@@ -49,16 +71,18 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         currentStamina = maxStamina;
-		SpearUpDownSprite = SpearUpDown.GetComponent<SpriteRenderer>();
-		SpearLeftRightSprite = SpearLeftRight.GetComponent<SpriteRenderer>();
+		spearUpDownSprite = spearUpDownGameObject.GetComponent<SpriteRenderer>();
+		spearLeftRightSprite = spearLeftRightGameObject.GetComponent<SpriteRenderer>();
+		shieldUpDownSprite = shieldUpDownGameObject.GetComponent<SpriteRenderer>();
+		shieldLeftRightSprite = shieldLeftRightGameObject.GetComponent<SpriteRenderer>();
     }
     private void Update()
     {
         UpdateMovement();
 		Attacking();
 		UpdateAnimations();
-
-    }
+		ShieldMove();
+	}
     //void FixedUpdate()
     //{
     //    UpdateMovement(); 
@@ -72,18 +96,17 @@ public class PlayerController : MonoBehaviour
 		moveVertical = Input.GetAxisRaw(vertical);
 		Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0);
         if(movement.x != 0 && movement.y != 0)
-            effectiveMovementSpeed = movementSpeed / 1.4f;
+			effectiveMovementSpeed = movementSpeed / 1.4f;
 
-		SpearUpDown.SetActive(tempV);
-		SpearLeftRight.SetActive(tempH);
-
+		spearUpDownGameObject.SetActive(tempV);
+		spearLeftRightGameObject.SetActive(tempH);
+		shieldUpDownGameObject.SetActive(tempV);
+		shieldLeftRightGameObject.SetActive(tempH);
 
 		if (enableSprint && Input.GetAxisRaw("Sprint") != 0)
-            effectiveMovementSpeed *= (Input.GetAxisRaw("Sprint") * sprintSpeedMultiplier);
+			effectiveMovementSpeed *= (Input.GetAxisRaw("Sprint") * sprintSpeedMultiplier);
 
         controller.Move(movement * Time.deltaTime * effectiveMovementSpeed);
-
-
 	}
 
 	void UpdateAnimations()
@@ -96,51 +119,61 @@ public class PlayerController : MonoBehaviour
         else
             animator.speed = 1;
     }
-  //  int Dash(Vector3 dashDirection)
-  //  {
-  //      Vector3 dashDistance = transform.position;
-  //      //float effectiveMovementSpeed = 10.0f;
-  //      currentStamina--;
-  //      Debug.Log("DashPressed " +dashDirection);
-  //      for (int i = 0; i < dashTime; i++)
-  //      {
-  //          controller.Move(dashDirection * Time.deltaTime * 1);
-  //      }
-		//currentStamina = maxStamina;
-        
-  //      return currentStamina;
-  //  }
+	int Dash(Vector3 dashDirection)
+	{
+		Vector3 dashDistance = transform.position;
+		float effectiveMovementSpeed = 10.0f;
+		currentStamina--;
+		Debug.Log("DashPressed " + dashDirection);
+		for (int i = 0; i < dashTime; i++)
+		{
+			controller.Move(dashDirection * Time.deltaTime * 1);
+		}
+		currentStamina = maxStamina;
+
+		return currentStamina;
+	}
 	void Attacking()
 	{
 
 		float x = Mathf.Abs(moveHorizontal);
 		float y = Mathf.Abs(moveVertical);
 
-		
+
 		if (y > x)
 		{
-			tempH = false;
 			tempV = true;
-
+			tempH = false;
 			if (moveVertical > 0)
 			{
-				SpearUpDownSprite.flipY = true;
+				spearUpDownSprite.flipY = true;
+				spearUpDownSprite.sortingOrder = 0;
 				Debug.Log("flipY");
-	
-				if (SpearUpDown.transform.localPosition.x != -spearPosition)
+
+				if (spearUpDownGameObject.transform.localPosition.x != spearPositionUpX)
 				{
-					SpearUpDown.transform.localPosition = new Vector3(-spearPosition, SpearUpDown.transform.localPosition.y);
+					spearUpDownGameObject.transform.localPosition = new Vector3(spearPositionUpX, spearUpDownGameObject.transform.localPosition.y);
 				}
-				
+				if (spearUpDownGameObject.transform.localPosition.y != spearPositionUpY)
+				{
+					spearUpDownGameObject.transform.localPosition = new Vector3(spearUpDownGameObject.transform.localPosition.x, spearPositionUpY);
+				}
 			}
-			
+
 			if (moveVertical < 0)
 			{
-				SpearUpDownSprite.flipY = false;
-				if (SpearUpDown.transform.localPosition.x != spearPosition)
+				spearUpDownSprite.flipY = false;
+				spearUpDownSprite.sortingOrder = 2;
+				if (spearUpDownGameObject.transform.localPosition.x != spearPositionDownX)
 				{
-					SpearUpDown.transform.localPosition = new Vector3(spearPosition, SpearUpDown.transform.localPosition.y);
+					spearUpDownGameObject.transform.localPosition = new Vector3(spearPositionDownX, spearUpDownGameObject.transform.localPosition.y);
 				}
+				if (spearUpDownGameObject.transform.localPosition.y != spearPositionLeftY)
+				{
+					spearUpDownGameObject.transform.localPosition = new Vector3(spearUpDownGameObject.transform.localPosition.x, spearPositionDownY);
+				}
+
+
 			}
 
 		}
@@ -150,35 +183,112 @@ public class PlayerController : MonoBehaviour
 			tempH = true;
 			if (moveHorizontal > 0)
 			{
-				SpearLeftRightSprite.flipX = true;
-				SpearLeftRightSprite.sortingOrder = 2;
-
+				spearLeftRightSprite.flipX = true;
+				spearLeftRightSprite.sortingOrder = 3;
+				if (spearLeftRightGameObject.transform.localPosition.x != spearPositionRightX)
+				{
+					spearLeftRightGameObject.transform.localPosition = new Vector3(spearPositionRightX, spearLeftRightGameObject.transform.localPosition.y);
+				}
+				if (spearLeftRightGameObject.transform.localPosition.y != spearPositionRightY)
+				{
+					spearLeftRightGameObject.transform.localPosition = new Vector3(spearLeftRightGameObject.transform.localPosition.x, spearPositionRightY);
+				}
 			}
 			if(moveHorizontal < 0)
 			{
-				SpearLeftRightSprite.flipX = false;
-				SpearLeftRightSprite.sortingOrder = 0;
+				spearLeftRightSprite.flipX = false;
+				spearLeftRightSprite.sortingOrder = 0;
 
-
+				if (spearLeftRightGameObject.transform.localPosition.x != spearPositionLeftX)
+				{
+					spearLeftRightGameObject.transform.localPosition = new Vector3(spearPositionLeftX, spearLeftRightGameObject.transform.localPosition.y);
+				}
+				if (spearLeftRightGameObject.transform.localPosition.y != spearPositionLeftY)
+				{
+					spearLeftRightGameObject.transform.localPosition = new Vector3(spearLeftRightGameObject.transform.localPosition.x, spearPositionLeftY);
+				}
 			}
 		}
 		if (Input.GetButtonDown(Fire1))
 		{
-			//float temp;
-			//if (SpearLeftRight.activeInHierarchy == true)
-			//{
-			//	if (moveHorizontal > 0)
-			//	{
-			//		SpearLeftRight.transform.localPosition = new Vector3(transform.localPosition.x, 
-			//			SpearLeftRightSprite.transform.localPosition.y * 2 * Time.deltaTime);
-			//	}
-			//	Debug.Log("Left and right spear: ");
-			//}
-			if (SpearUpDown.activeInHierarchy == true)
+			if (spearUpDownGameObject.activeInHierarchy == true)
 			{
-				Debug.Log("Up and down spear: ");
+				Debug.Log("Up and down shield: ");
 			}
 			Debug.Log("You hit me");
+		}
+	}
+	void ShieldMove()
+	{
+		float x = Mathf.Abs(moveHorizontal);
+		float y = Mathf.Abs(moveVertical);
+
+
+		if (y > x)
+		{
+
+			if (moveVertical < 0)
+			{
+				//shieldUpDownSprite.flipY = true;
+				shieldUpDownSprite.sortingOrder = 2;
+				Debug.Log("flipY");
+
+				if (shieldUpDownGameObject.transform.localPosition.x != -shieldPositionDownX)
+				{
+					shieldUpDownGameObject.transform.localPosition = new Vector3(shieldPositionDownX, shieldUpDownGameObject.transform.localPosition.y);
+				}
+				if (shieldUpDownGameObject.transform.localPosition.y != shieldPositionUpY)
+				{
+					shieldUpDownGameObject.transform.localPosition = new Vector3(shieldUpDownGameObject.transform.localPosition.x, shieldPositionDownY);
+				}
+			}
+
+			if (moveVertical > 0)
+			{
+				//shieldUpDownSprite.flipY = false;
+				shieldUpDownSprite.sortingOrder = 0;
+				if (shieldUpDownGameObject.transform.localPosition.x != shieldPositionUpX)
+				{
+					shieldUpDownGameObject.transform.localPosition = new Vector3(shieldPositionUpX, shieldUpDownGameObject.transform.localPosition.y);
+				}
+				if (shieldUpDownGameObject.transform.localPosition.y != shieldPositionUpY)
+				{
+					shieldUpDownGameObject.transform.localPosition = new Vector3(shieldUpDownGameObject.transform.localPosition.y, shieldPositionUpY);
+				}
+
+
+			}
+
+		}
+		if (x > y)
+		{
+			if (moveHorizontal > 0)
+			{
+				//shieldLeftRightSprite.flipX = true;
+				shieldLeftRightSprite.sortingOrder = 2;
+				if (shieldLeftRightGameObject.transform.localPosition.x != shieldPositionRightX)
+				{
+					shieldLeftRightGameObject.transform.localPosition = new Vector3(shieldPositionRightX, shieldLeftRightGameObject.transform.localPosition.y);
+				}
+				if (shieldLeftRightGameObject.transform.localPosition.y != shieldPositionRightY)
+				{
+					shieldLeftRightGameObject.transform.localPosition = new Vector3(shieldLeftRightGameObject.transform.localPosition.x, shieldPositionRightY);
+				}
+			}
+			if (moveHorizontal < 0)
+			{
+				shieldLeftRightSprite.flipX = false;
+				shieldLeftRightSprite.sortingOrder = 0;
+				if (shieldLeftRightGameObject.transform.localPosition.x != shieldPositionLeftX)
+				{
+					shieldLeftRightGameObject.transform.localPosition = new Vector3(shieldPositionLeftX, shieldLeftRightGameObject.transform.localPosition.y);
+				}
+				if (shieldLeftRightGameObject.transform.localPosition.y != shieldPositionLeftY)
+				{
+					shieldLeftRightGameObject.transform.localPosition = new Vector3(shieldLeftRightGameObject.transform.localPosition.x, shieldPositionLeftY);
+				}
+
+			}
 		}
 	}
 }
