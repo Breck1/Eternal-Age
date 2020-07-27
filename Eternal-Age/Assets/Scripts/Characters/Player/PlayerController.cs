@@ -150,28 +150,30 @@ public class PlayerController : MonoBehaviour
 				spearUpDownSprite.sortingOrder = 0;
 				Debug.Log("flipY");
 
-				if (spearUpDownGameObject.transform.localPosition.x != spearPositionUpX)
+				if (spearUpDownGameObject.transform.localPosition.x != spearPositionUpX ||
+					spearUpDownGameObject.transform.localPosition.y != spearPositionUpY)
 				{
-					spearUpDownGameObject.transform.localPosition = new Vector3(spearPositionUpX, spearUpDownGameObject.transform.localPosition.y);
+					spearUpDownGameObject.transform.localPosition = new Vector3(spearPositionUpX, spearPositionUpY);
 				}
-				if (spearUpDownGameObject.transform.localPosition.y != spearPositionUpY)
-				{
-					spearUpDownGameObject.transform.localPosition = new Vector3(spearUpDownGameObject.transform.localPosition.x, spearPositionUpY);
-				}
+				//if (spearUpDownGameObject.transform.localPosition.y != spearPositionUpY)
+				//{
+				//	spearUpDownGameObject.transform.localPosition = new Vector3(spearUpDownGameObject.transform.localPosition.x, spearPositionUpY);
+				//}
 			}
 
 			if (moveVertical < 0)
 			{
 				spearUpDownSprite.flipY = false;
 				spearUpDownSprite.sortingOrder = 2;
-				if (spearUpDownGameObject.transform.localPosition.x != spearPositionDownX)
+				if (spearUpDownGameObject.transform.localPosition.x != spearPositionDownX || 
+					spearUpDownGameObject.transform.localPosition.y != spearPositionLeftY)
 				{
-					spearUpDownGameObject.transform.localPosition = new Vector3(spearPositionDownX, spearUpDownGameObject.transform.localPosition.y);
+					spearUpDownGameObject.transform.localPosition = new Vector3(spearPositionDownX, spearPositionDownY);
 				}
-				if (spearUpDownGameObject.transform.localPosition.y != spearPositionLeftY)
-				{
-					spearUpDownGameObject.transform.localPosition = new Vector3(spearUpDownGameObject.transform.localPosition.x, spearPositionDownY);
-				}
+				//if (spearUpDownGameObject.transform.localPosition.y != spearPositionLeftY)
+				//{
+				//	spearUpDownGameObject.transform.localPosition = new Vector3(spearUpDownGameObject.transform.localPosition.x, spearPositionDownY);
+				//}
 
 
 			}
@@ -185,28 +187,30 @@ public class PlayerController : MonoBehaviour
 			{
 				spearLeftRightSprite.flipX = true;
 				spearLeftRightSprite.sortingOrder = 3;
-				if (spearLeftRightGameObject.transform.localPosition.x != spearPositionRightX)
+				if (spearLeftRightGameObject.transform.localPosition.x != spearPositionRightX ||
+					spearLeftRightGameObject.transform.localPosition.y != spearPositionRightY)
 				{
-					spearLeftRightGameObject.transform.localPosition = new Vector3(spearPositionRightX, spearLeftRightGameObject.transform.localPosition.y);
+					spearLeftRightGameObject.transform.localPosition = new Vector3(spearPositionRightX, spearPositionRightY);
 				}
-				if (spearLeftRightGameObject.transform.localPosition.y != spearPositionRightY)
-				{
-					spearLeftRightGameObject.transform.localPosition = new Vector3(spearLeftRightGameObject.transform.localPosition.x, spearPositionRightY);
-				}
+				//if (spearLeftRightGameObject.transform.localPosition.y != spearPositionRightY)
+				//{
+				//	spearLeftRightGameObject.transform.localPosition = new Vector3(spearLeftRightGameObject.transform.localPosition.x, spearPositionRightY);
+				//}
 			}
 			if(moveHorizontal < 0)
 			{
 				spearLeftRightSprite.flipX = false;
 				spearLeftRightSprite.sortingOrder = 0;
 
-				if (spearLeftRightGameObject.transform.localPosition.x != spearPositionLeftX)
+				if (spearLeftRightGameObject.transform.localPosition.x != spearPositionLeftX ||
+					spearLeftRightGameObject.transform.localPosition.y != spearPositionLeftY)
 				{
-					spearLeftRightGameObject.transform.localPosition = new Vector3(spearPositionLeftX, spearLeftRightGameObject.transform.localPosition.y);
+					spearLeftRightGameObject.transform.localPosition = new Vector3(spearPositionLeftX, spearPositionLeftY);
 				}
-				if (spearLeftRightGameObject.transform.localPosition.y != spearPositionLeftY)
-				{
-					spearLeftRightGameObject.transform.localPosition = new Vector3(spearLeftRightGameObject.transform.localPosition.x, spearPositionLeftY);
-				}
+				//if (spearLeftRightGameObject.transform.localPosition.y != spearPositionLeftY)
+				//{
+				//	spearLeftRightGameObject.transform.localPosition = new Vector3(spearLeftRightGameObject.transform.localPosition.x, spearPositionLeftY);
+				//}
 			}
 		}
 		if (Input.GetButtonDown(Fire1))
@@ -233,23 +237,25 @@ public class PlayerController : MonoBehaviour
 				shieldUpDownSprite.sortingOrder = 2;
 				Debug.Log("flipY");
 
-				if (shieldUpDownGameObject.transform.localPosition.x != -shieldPositionDownX)
+				if (shieldUpDownGameObject.transform.localPosition.x != -shieldPositionDownX ||
+					shieldUpDownGameObject.transform.localPosition.y != shieldPositionUpY)
 				{
-					shieldUpDownGameObject.transform.localPosition = new Vector3(shieldPositionDownX, shieldUpDownGameObject.transform.localPosition.y);
+					shieldUpDownGameObject.transform.localPosition = new Vector3(shieldPositionDownX, shieldPositionDownY);
 				}
-				if (shieldUpDownGameObject.transform.localPosition.y != shieldPositionUpY)
-				{
-					shieldUpDownGameObject.transform.localPosition = new Vector3(shieldUpDownGameObject.transform.localPosition.x, shieldPositionDownY);
-				}
+				//if (shieldUpDownGameObject.transform.localPosition.y != shieldPositionUpY)
+				//{
+				//	shieldUpDownGameObject.transform.localPosition = new Vector3(shieldUpDownGameObject.transform.localPosition.x, shieldPositionDownY);
+				//}
 			}
 
 			if (moveVertical > 0)
 			{
 				//shieldUpDownSprite.flipY = false;
 				shieldUpDownSprite.sortingOrder = 0;
-				if (shieldUpDownGameObject.transform.localPosition.x != shieldPositionUpX)
+				if (shieldUpDownGameObject.transform.localPosition.x != shieldPositionUpX ||
+					shieldUpDownGameObject.transform.localPosition.y != shieldPositionUpY)
 				{
-					shieldUpDownGameObject.transform.localPosition = new Vector3(shieldPositionUpX, shieldUpDownGameObject.transform.localPosition.y);
+					shieldUpDownGameObject.transform.localPosition = new Vector3(shieldPositionUpX, shieldPositionUpY);
 				}
 				if (shieldUpDownGameObject.transform.localPosition.y != shieldPositionUpY)
 				{
@@ -266,27 +272,29 @@ public class PlayerController : MonoBehaviour
 			{
 				//shieldLeftRightSprite.flipX = true;
 				shieldLeftRightSprite.sortingOrder = 2;
-				if (shieldLeftRightGameObject.transform.localPosition.x != shieldPositionRightX)
+				if (shieldLeftRightGameObject.transform.localPosition.x != shieldPositionRightX ||
+					shieldLeftRightGameObject.transform.localPosition.y != shieldPositionRightY)
 				{
-					shieldLeftRightGameObject.transform.localPosition = new Vector3(shieldPositionRightX, shieldLeftRightGameObject.transform.localPosition.y);
+					shieldLeftRightGameObject.transform.localPosition = new Vector3(shieldPositionRightX, shieldPositionRightY);
 				}
-				if (shieldLeftRightGameObject.transform.localPosition.y != shieldPositionRightY)
-				{
-					shieldLeftRightGameObject.transform.localPosition = new Vector3(shieldLeftRightGameObject.transform.localPosition.x, shieldPositionRightY);
-				}
+				//if (shieldLeftRightGameObject.transform.localPosition.y != shieldPositionRightY)
+				//{
+				//	shieldLeftRightGameObject.transform.localPosition = new Vector3(shieldLeftRightGameObject.transform.localPosition.x, shieldPositionRightY);
+				//}
 			}
 			if (moveHorizontal < 0)
 			{
 				shieldLeftRightSprite.flipX = false;
 				shieldLeftRightSprite.sortingOrder = 0;
-				if (shieldLeftRightGameObject.transform.localPosition.x != shieldPositionLeftX)
+				if (shieldLeftRightGameObject.transform.localPosition.x != shieldPositionLeftX || 
+					shieldLeftRightGameObject.transform.localPosition.y != shieldPositionLeftY)
 				{
-					shieldLeftRightGameObject.transform.localPosition = new Vector3(shieldPositionLeftX, shieldLeftRightGameObject.transform.localPosition.y);
+					shieldLeftRightGameObject.transform.localPosition = new Vector3(shieldPositionLeftX, shieldPositionLeftY);
 				}
-				if (shieldLeftRightGameObject.transform.localPosition.y != shieldPositionLeftY)
-				{
-					shieldLeftRightGameObject.transform.localPosition = new Vector3(shieldLeftRightGameObject.transform.localPosition.x, shieldPositionLeftY);
-				}
+				//if (shieldLeftRightGameObject.transform.localPosition.y != shieldPositionLeftY)
+				//{
+				//	shieldLeftRightGameObject.transform.localPosition = new Vector3(shieldLeftRightGameObject.transform.localPosition.x, shieldPositionLeftY);
+				//}
 
 			}
 		}
