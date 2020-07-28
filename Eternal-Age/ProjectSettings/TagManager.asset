@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Spear
+  - Spikes
+  - Shield
+  - Enemy
   layers:
   - Default
   - TransparentFX
